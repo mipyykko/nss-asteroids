@@ -1,7 +1,13 @@
 {
+  "compilerOptions": {
+    "composite": true
+  },
+  "files": [],
+  "includes": [],
+  "baseUrl": ".",
   "references": [
-    { "path": "./shared" },
-    { "path": "./backend" }
+    { "path": "./packages/shared" },
+    { "path": "./packages/backend" }
   ],
   "exclude": ["**/node_modules"]
 }

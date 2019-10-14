@@ -2,12 +2,22 @@
   "name": "arkanoid",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
+    "compile": "tsc --build tsconfig.json",
+    "compile:clean": "tsc --build tsconfig.json --clean",
+    "watch": "tsc --build tsconfig.json --watch",
+    "postinstall": "lerna run prepare && npm run compile",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "private": true,
-  "workspaces": ["frontend", "backend", "shared"]
+  "dependencies": {
+    "@types/socket.io": "^2.1.4",
+    "backend": "file:packages/backend",
+    "shared": "file:packages/shared"
+  },
+  "devDependencies": {
+    "lerna": "^3.17.0"
+  }
 }

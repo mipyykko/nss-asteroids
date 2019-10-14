@@ -1,9 +1,0 @@
-{
-  "name": "shared",
-  "version": "1.0.0",
-  "dependencies": {
-    "@types/lodash": "^4.14.144",
-    "lodash": "^4.17.15",
-    "vector2d": "^3.0.0"
-  }
-}
