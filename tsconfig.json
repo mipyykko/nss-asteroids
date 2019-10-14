@@ -1,0 +1,7 @@
+{
+  "references": [
+    { "path": "./shared" },
+    { "path": "./backend" }
+  ],
+  "exclude": ["**/node_modules"]
+}
