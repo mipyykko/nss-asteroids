@@ -1,0 +1,1 @@
+{"version":3,"file":"asteroid.d.ts","sourceRoot":"","sources":["../../src/entities/asteroid.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,eAAe,EAAc,MAAM,WAAW,CAAA;AACvD,OAAO,EAAE,MAAM,EAAgB,MAAM,UAAU,CAAA;AAE/C,MAAM,WAAW,oBAAoB;IACnC,SAAS,EAAE,MAAM,CAAA;IACjB,UAAU,EAAE,MAAM,CAAA;IAClB,OAAO,EAAE,eAAe,CAAA;CACzB;AAED,qBAAa,cAAe,SAAQ,MAAM;gBAC5B,KAAK,EAAE,oBAAoB;IAqBhC,MAAM;CAGd"}

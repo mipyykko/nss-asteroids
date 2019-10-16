@@ -1,0 +1,1 @@
+{"version":3,"file":"shot.d.ts","sourceRoot":"","sources":["../../src/entities/shot.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,YAAY,EAAE,MAAM,EAAE,MAAM,UAAU,CAAA;AAQ/C,MAAM,WAAW,gBAAiB,SAAQ,YAAY;CAErD;AAKD,qBAAa,UAAW,SAAQ,MAAM;IAC7B,IAAI,EAAE,OAAO,CAAA;IACb,iBAAiB,EAAE,MAAM,CAAA;gBAEpB,KAAK,EAAE,gBAAgB;IAoB5B,MAAM;CAUd"}

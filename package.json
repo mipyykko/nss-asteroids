@@ -4,21 +4,28 @@
   "description": "",
   "main": "packages/backend/dist/src/server",
   "scripts": {
-    "compile": "tsc --build tsconfig.json",
+    "build": "./node_modules/typescript/bin/tsc && cd packages/frontend && yarn build && cd ../..",
+    "serve": "concurrently -k \"node packages/backend/dist/server\" \"./node_modules/serve/bin/serve.js ./packages/frontend/build\"",
+    "compile": "./node_modules/typescript/bin/tsc --build tsconfig.json",
     "compile:clean": "tsc --build tsconfig.json --clean",
     "watch": "tsc --build tsconfig.json --watch",
-    "postinstall": "lerna run prepare && npm run compile",
+    "postinstall": "./node_modules/lerna/cli.js run prepare && yarn run compile",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "private": true,
   "dependencies": {
+    "@types/express": "^4.17.1",
     "@types/socket.io": "^2.1.4",
     "backend": "file:packages/backend",
-    "shared": "file:packages/shared"
+    "frontend": "file:packages/frontend",
+    "shared": "file:packages/shared",
+    "typescript": "^3.6.4"
   },
   "devDependencies": {
-    "lerna": "^3.17.0"
+    "concurrently": "^5.0.0",
+    "lerna": "^3.18.1",
+    "serve": "^11.2.0"
   }
 }
