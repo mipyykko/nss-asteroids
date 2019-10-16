@@ -6,21 +6,22 @@ import {
   GameStatus,
   EventType,
   IPlayerInput,
-} from "shared/src/models"
-import * as Vec2D from "vector2d"
-import { range } from "lodash"
-import { IEntityObject } from "./entities/entity"
-import { ShipEntity } from "./entities/ship"
-import { AsteroidEntity } from "./entities/asteroid"
+} from "shared/dist/models"
+import { range} from "lodash"
+import { IEntityObject } from "shared/dist/entities/entity"
+import { ShipEntity } from "shared/dist/entities/ship"
+import { AsteroidEntity } from "shared/dist/entities/asteroid"
+import { ShotEntity } from "shared/dist/entities/shot"
 import socketio from "socket.io"
 
 export class Game {
-  private readonly updateInterval = 1000
-  private readonly sendUpdateInterval = 1000
+  private readonly updateInterval = 1000 / 60
+  private readonly sendUpdateInterval = 1000 / 20
   private clients: { [clientId: string]: IClient } = {}
   private entities: IEntityObject[] = []
   private width = 6000
   private height = 6000
+  private ASTEROID_COUNT = this.width / 100
   private gameState?: IGameStateUpdate
   private updating: boolean = false
   private prevGameState?: IGameStateUpdate = {
@@ -28,14 +29,17 @@ export class Game {
     status: GameStatus.PAUSED,
     clients: [],
     entities: [],
+    height: 0,
+    width: 0,
   }
   private gameUpdateTimeout?: NodeJS.Timeout
   private sendUpdateTimeout?: NodeJS.Timeout
-  private inputQueues: { [clientId: string]: IPlayerInput[] } = {}
+  private inputQueues: { [clientId: string]: IPlayerInput[] }
   private server: socketio.Server
 
   constructor(server: socketio.Server) {
     this.server = server
+    this.inputQueues = {}
 
     server.on(EventType.CONNECTION, (socket: socketio.Socket) => {
       const client: IClient = {
@@ -53,11 +57,11 @@ export class Game {
       this.playerJoin(client)
     })
 
-    const asteroids: IEntityObject[] = range(5).map(
+    const asteroids: IEntityObject[] = range(this.ASTEROID_COUNT).map(
       (_) =>
         new AsteroidEntity({
-          width: this.width,
-          height: this.height,
+          gameWidth: this.width,
+          gameHeight: this.height,
           subtype:
             Math.random() > 0.8
               ? AsteroidSubType.LARGE
@@ -81,6 +85,15 @@ export class Game {
     ) */
   }
 
+  public pause() {
+    if (this.gameUpdateTimeout) {
+      clearTimeout(this.gameUpdateTimeout)
+    }
+    if (this.sendUpdateTimeout) {
+      clearTimeout(this.sendUpdateTimeout)
+    }
+  }
+
   private updateState() {
     this.updating = true
 
@@ -88,44 +101,37 @@ export class Game {
 
     this.gameState = {
       time: Date.now(),
+      width: this.width,
+      height: this.height,
       status: Object.keys(this.clients).length ? GameStatus.RUNNING : GameStatus.PAUSED,
       clients: Object.values(this.clients),
       entities: this.entities,
     }
 
-/*     if (this.gameState.status !== this.prevGameState!.status) {
+    if (this.gameState.status !== this.prevGameState!.status) {
       if (this.gameState.status === GameStatus.RUNNING) {
-        this.gameUpdateTimeout = setTimeout(this.update, this.updateInterval)
-        this.sendUpdateTimeout = setTimeout(
-          this.sendGameState,
-          this.sendUpdateInterval,
-        )
+        this.start()
       } else {
-        if (this.gameUpdateTimeout) {
-          clearTimeout(this.gameUpdateTimeout)
-        }
-        if (this.sendUpdateTimeout) {
-          clearTimeout(this.sendUpdateTimeout)
-        }
+        this.pause()
       }
-    } */
+    }
 
     this.updating = false
     this.prevGameState = Object.assign({}, this.gameState)
   }
 
   private update() {
-    console.log("update?")
-
     // tslint:disable-next-line: align whitespace
-    ;(this.entities || []).forEach((entity: IEntityObject) => entity.update())
+    (this.entities || []).forEach((entity: IEntityObject) => entity.update())
+    this.entities = this.filterDead(this.entities)
 
     this.updateState()
+  }
 
-/*     if (this.isRunning) {
-      const self = this
-      this.gameUpdateTimeout = setTimeout(() => self.update(), this.updateInterval)
-    } */
+  private filterDead(entities: IEntityObject[]) {
+    return entities.filter((e: IEntityObject) => {
+      return e.type !== EntityType.SHOT || (e.type === EntityType.SHOT && !(e as ShotEntity).dead)
+    })
   }
 
   private get isRunning() {
@@ -133,25 +139,26 @@ export class Game {
   }
 
   private playerJoin(client: IClient) {
-    console.log("player joining?", client.id)
+    console.log("player joined", client.id)
     if (!this.clients[client.id]) {
-      console.log("wasn't here!")
       this.inputQueues[client.id] = []
 
       const ship = new ShipEntity({
         ownerId: client.id,
-        position: new Vec2D.Vector(
-          Math.random() * this.width,
-          Math.random() * this.height,
-        ),
+        x: Math.random() * this.width,
+        y: Math.random() * this.height,
         heading: 0.0,
-        velocity: new Vec2D.Vector(0.0, 0.0),
+        velocityX: 0.0,
+        velocityY: 0.0,
         rotation: 0,
         inputs: this.inputQueues[client.id],
+        gameWidth: this.width,
+        gameHeight: this.height,
+        fireCallback: this.fire.bind(this)
       })
 
-      client.socket.on(EventType.PLAYER_INPUT, this.handlePlayerInput)
-      client.socket.on(EventType.PLAYER_UPDATE, this.handlePlayerUpdate)
+      client.socket.on(EventType.PLAYER_INPUT, this.handlePlayerInput.bind(this))
+      client.socket.on(EventType.PLAYER_UPDATE, this.handlePlayerUpdate.bind(this))
 
       this.entities.push(ship)
       this.clients[client.id] = client
@@ -162,6 +169,8 @@ export class Game {
   private handlePlayerUpdate() {}
 
   private playerPart(client: IClient) {
+    console.log("player parted", client.id)
+
     delete this.clients[client.id]
     this.entities = this.entities.filter(
       (e: IEntityObject) =>
@@ -175,25 +184,22 @@ export class Game {
   }
 
   private handlePlayerInput(input: IPlayerInput) {
-    this.inputQueues[input.clientId].unshift(input)
+    if (this.inputQueues[input.clientId]) {
+      this.inputQueues[input.clientId].unshift(input)
+    }
   }
 
+  private fire(shipEntity: ShipEntity) {
+    const shot = new ShotEntity({ ...shipEntity, id: undefined })
+    this.entities.push(shot)
+  }
 
   private sendGameState() {
     Object.values(this.clients).forEach((client: IClient) => {
-      // filter socket
+      // TODO: send list of players, filter sockets
       const sendableState = { ...this.state, clients: [] }
-      console.log(JSON.stringify(sendableState))
-      // console.log("client id", client.id, state)
       client.socket.emit(EventType.SERVER_STATE, sendableState)
     })
-
-/*     const self = this
-
-    this.sendUpdateTimeout = setTimeout(
-      () => self.sendGameState(),
-      this.sendUpdateInterval,
-    ) */
   }
 
   private getByType(type: EntityType) {

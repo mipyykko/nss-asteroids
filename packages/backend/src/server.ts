@@ -19,8 +19,6 @@ class Server {
     })
 
     this.game = new Game(io)
-    this.game.start()
-
   }
 }
 

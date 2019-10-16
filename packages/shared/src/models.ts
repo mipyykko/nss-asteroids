@@ -49,10 +49,13 @@ export interface IEntity {
   ownerId?: string
   type?: EntityType
   subtype?: EntitySubType
-  position: Vec2D.Vector
-  velocity: Vec2D.Vector
+  x: number
+  y: number
+  velocityX: number
+  velocityY: number
   heading: number 
   rotation: number
+  shape?: { x: number, y: number }[]
 }
 
 export interface IPlayerInput {
@@ -64,9 +67,12 @@ export interface IPlayerInput {
 export interface IPlayerPositionUpdate {
   clientId: string
   time: number
-  position: Vec2D.Vector
-  velocity: Vec2D.Vector
-  heading: Vec2D.Vector
+  x: number
+  y: number
+  velocityX: number
+  velocityY: number
+  heading: number
+  rotation: number
 }
 
 export enum GameStatus {
@@ -77,6 +83,9 @@ export enum GameStatus {
 export interface IGameStateUpdate {
   time: number
   status: GameStatus
+  width: number
+  height: number
   clients: IClient[]
   entities: IEntity[]
 }
+

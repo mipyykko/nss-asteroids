@@ -2,6 +2,7 @@
   "name": "arkanoid",
   "version": "1.0.0",
   "description": "",
+  "main": "packages/backend/dist/src/server",
   "scripts": {
     "compile": "tsc --build tsconfig.json",
     "compile:clean": "tsc --build tsconfig.json --clean",
