@@ -27,7 +27,7 @@ If this fails at some step, you may need to install [TypeScript](https://www.typ
 $ npm install -g typescript
 ```
 
-If something *still* goes wrong, you may have to build the packages yourself one by one. In `packages` directory there are three packages: `shared`, `backend` and `frontend`. Starting from `shared` (the others depend on it), `cd` to each directory and run `yarn run build`. Monorepos and TypeScript are evil, I tells you.
+If something *still* goes wrong, you may have to build the packages yourself one by one. In `packages` directory there are three packages: `shared`, `backend` and `frontend`. Starting from `shared` (the others depend on it), `cd` to each directory and run `yarn run build`. Monorepos and TypeScript are an evil combination, I tells you.
 
 #### Usage
 
