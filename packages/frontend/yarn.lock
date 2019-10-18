@@ -8932,7 +8932,7 @@ shallow-clone@^3.0.0:
   dependencies:
     kind-of "^6.0.2"
 
-shared@../shared:
+"shared@file:../shared":
   version "1.0.0"
   dependencies:
     vector2d "^3.0.0"

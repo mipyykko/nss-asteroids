@@ -1000,9 +1000,9 @@
   integrity sha512-1dVNHT76Uu5N3eJNTYcvxee+jzX4Z9lfciqRRHCU27ihbUcYi+iSc2iml5Ke1LXe1SyJCLA0+14Jh4tXJgOppA==
 
 "@hapi/hoek@8.x.x", "@hapi/hoek@^8.3.0":
-  version "8.3.1"
-  resolved "https://registry.yarnpkg.com/@hapi/hoek/-/hoek-8.3.1.tgz#227d29efdb158e4a64590224add90c820f94d20e"
-  integrity sha512-75ocgnI7HG/I01iGA3/rs0y6PXydUA/kxhFZM0HoT8NLSTnt/J8Gq03iKl4a4B/2A3iMG0ctXtxr5Hg9SGr1gw==
+  version "8.3.2"
+  resolved "https://registry.yarnpkg.com/@hapi/hoek/-/hoek-8.3.2.tgz#91e7188edebc5d876f0b91a860f555ff06f0782b"
+  integrity sha512-NP5SG4bzix+EtSMtcudp8TvI0lB46mXNo8uFpTDw6tqxGx4z5yx+giIunEFA0Z7oUO4DuWrOJV9xqR2tJVEdyA==
 
 "@hapi/joi@^15.0.0":
   version "15.1.1"
@@ -2164,9 +2164,9 @@
     "@types/react" "*"
 
 "@types/react@*":
-  version "16.9.8"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.8.tgz#6b01592193213263300f8b242a08b172cc49f63f"
-  integrity sha512-FlifFL8nuWkLqXG3F7UhjglhlONeIUbt+PZOz3fUEba85azJwXGxR18WYnOUfaLW6jt7fMykYO9TTM980em34A==
+  version "16.9.9"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.9.tgz#a62c6f40f04bc7681be5e20975503a64fe783c3a"
+  integrity sha512-L+AudFJkDukk+ukInYvpoAPyJK5q1GanFOINOJnM0w6tUgITuWvJ4jyoBPFL7z4/L8hGLd+K/6xR5uUjXu0vVg==
   dependencies:
     "@types/prop-types" "*"
     csstype "^2.2.0"
@@ -3043,7 +3043,7 @@ babylon@^6.18.0:
     cross-env "5.0.5"
     express "^4.17.1"
     lodash "^4.17.15"
-    shared "file:../../../../pyykkomi/.cache/yarn/v4/npm-backend-1.0.0-22b29bd4-a2d2-4036-81fe-71ed47aaef6c-1571248697852/node_modules/shared"
+    shared "file:../../../../pyykkomi/.cache/yarn/v4/npm-backend-1.0.0-a5d14706-37c5-4da3-b0c9-4a24cc7bbc68-1571386787881/node_modules/shared"
     socket.io "^2.3.0"
     vector2d "^3.0.0"
 
@@ -3292,7 +3292,7 @@ browserify-zlib@^0.2.0:
   dependencies:
     pako "~1.0.5"
 
-browserslist@4.7.0, browserslist@^4.0.0, browserslist@^4.1.1, browserslist@^4.6.0, browserslist@^4.6.4, browserslist@^4.7.0:
+browserslist@4.7.0:
   version "4.7.0"
   resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-4.7.0.tgz#9ee89225ffc07db03409f2fee524dc8227458a17"
   integrity sha512-9rGNDtnj+HaahxiVV38Gn8n8Lr8REKsel68v1sPFfIGEK6uSXTY3h9acgiT1dZVtOOUtifo/Dn8daDQ5dUgVsA==
@@ -3300,6 +3300,15 @@ browserslist@4.7.0, browserslist@^4.0.0, browserslist@^4.1.1, browserslist@^4.6.
     caniuse-lite "^1.0.30000989"
     electron-to-chromium "^1.3.247"
     node-releases "^1.1.29"
+
+browserslist@^4.0.0, browserslist@^4.1.1, browserslist@^4.6.0, browserslist@^4.6.4, browserslist@^4.7.0:
+  version "4.7.1"
+  resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-4.7.1.tgz#bd400d1aea56538580e8c4d5f1c54ac11b5ab468"
+  integrity sha512-QtULFqKIAtiyNx7NhZ/p4rB8m3xDozVo/pi5VgTlADLF2tNigz/QH+v0m5qhn7XfHT7u+607NcCNOnC0HZAlMg==
+  dependencies:
+    caniuse-lite "^1.0.30000999"
+    electron-to-chromium "^1.3.284"
+    node-releases "^1.1.36"
 
 bser@^2.0.0:
   version "2.1.0"
@@ -4874,10 +4883,10 @@ ee-first@1.1.1:
   resolved "https://registry.yarnpkg.com/ee-first/-/ee-first-1.1.1.tgz#590c61156b0ae2f4f0255732a158b266bc56b21d"
   integrity sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=
 
-electron-to-chromium@^1.3.247:
-  version "1.3.282"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.282.tgz#16118ae9c79a32ea93a17591d5b16e28d10fc08d"
-  integrity sha512-irSaDeCGgfMu1OA30bhqIBr+dx+pDJjRbwCpob7YWqVZbzXblybNzPGklVnWqv4EXxbkEAzQYqiNCqNTgu00lQ==
+electron-to-chromium@^1.3.247, electron-to-chromium@^1.3.284:
+  version "1.3.285"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.285.tgz#909576db2ee4dfec74a87aa30c92f66ebfc78748"
+  integrity sha512-DYR9KW723sUbGK++DCmCmM95AbNXT4Q0tlCFMcYijFjayhuDqlGYR68OemlP8MJj0gjkwdeItIUfd0oLCgw+4A==
 
 elliptic@^6.0.0:
   version "6.5.1"
@@ -5769,7 +5778,7 @@ from2@^2.1.0:
     react-dom "^16.10.2"
     react-konva "^16.10.1-0"
     react-scripts "3.2.0"
-    shared "file:../../../../pyykkomi/.cache/yarn/v4/npm-frontend-0.1.0-6d163db9-5e19-4e79-b97b-a1b87d45d6b3-1571248697983/node_modules/shared"
+    shared "file:../../../../pyykkomi/.cache/yarn/v4/npm-frontend-0.1.0-7c32b43c-ca78-48ff-b201-8eb78837afa4-1571386788226/node_modules/shared"
     socket.io-client "^2.3.0"
     typescript "3.6.3"
 
@@ -8532,7 +8541,7 @@ node-pre-gyp@^0.12.0:
     semver "^5.3.0"
     tar "^4"
 
-node-releases@^1.1.29:
+node-releases@^1.1.29, node-releases@^1.1.36:
   version "1.1.36"
   resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-1.1.36.tgz#44b7cb8254138e87bdbfa47761d0f825e20900b4"
   integrity sha512-ggXhX6QGyJSjj3r+6ml2LqqC28XOWmKtpb+a15/Zpr9V3yoNazxJNlcQDS9bYaid5FReEWHEgToH1mwoUceWwg==

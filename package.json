@@ -1,5 +1,5 @@
 {
-  "name": "arkanoid",
+  "name": "asteroids",
   "version": "1.0.0",
   "description": "",
   "main": "packages/backend/dist/src/server",
@@ -18,10 +18,10 @@
   "dependencies": {
     "@types/express": "^4.17.1",
     "@types/socket.io": "^2.1.4",
-    "backend": "file:packages/backend",
-    "frontend": "file:packages/frontend",
+    "typescript": "^3.6.4",
     "shared": "file:packages/shared",
-    "typescript": "^3.6.4"
+    "backend": "file:packages/backend",
+    "frontend": "file:packages/frontend"
   },
   "devDependencies": {
     "concurrently": "^5.0.0",
